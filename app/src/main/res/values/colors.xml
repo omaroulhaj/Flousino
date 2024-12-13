@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="movi">#4F52FF</color>
+    <color name="dashboard_color">#4F52FF</color>
+    <color name="ajouter_color">#09005D</color>
+    <color name="exepenses_color">#1A0F91</color>
+    <color name="m1">#536DFE</color>
+    <color name="pink">#E91E63</color>
+    <color name="green">#4CAF50</color>
+
+
+</resources>

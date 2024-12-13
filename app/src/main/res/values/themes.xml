@@ -1,0 +1,30 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Flousino" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="drawerArrowStyle">@style/DrawerIconStyle</item>
+    </style>
+
+    <style name="DrawerIconStyle" parent="Widget.AppCompat.DrawerArrowToggle" >
+        <item name="color" >@android:color/white</item>
+    </style>
+
+    <style name="Theme.Flousino" parent="Base.Theme.Flousino" />
+    <style name="CancelButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:background">@color/pink</item> <!-- Utilisez votre couleur personnalisée -->
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    </style>
+
+    <style name="SaveButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:background">@color/green</item> <!-- Utilisez votre couleur personnalisée -->
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    </style>
+
+
+</resources>

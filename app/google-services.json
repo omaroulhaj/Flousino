@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "524727863782",
+    "project_id": "flousino-d2dcd",
+    "storage_bucket": "flousino-d2dcd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:524727863782:android:24a0253728bb2160e2ae27",
+        "android_client_info": {
+          "package_name": "com.example.flousino"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBof3hxYCQsTDFL71xtaWSeJTs3TWVr0Wo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
