@@ -70,8 +70,9 @@
                 android:text="000.000"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:textStyle="bold"
+                android:layout_margin="5dp"
                 android:id="@+id/ammount_txt_expense"
-                android:textColor="@color/movi"
+                android:textColor="@color/design_default_color_error"
 
                 />
 

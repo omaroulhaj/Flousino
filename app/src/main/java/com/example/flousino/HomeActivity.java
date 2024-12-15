@@ -1,5 +1,6 @@
 package com.example.flousino;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -18,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -28,12 +30,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private DashboardFragment dashboardFragment;
     private AjouterFragment ajouterFragment;
     private ExpenseFragment expenseFragment;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
-
+        mAuth=FirebaseAuth.getInstance();
         // Configuration de la barre d'outils
         drawerLayout = findViewById(R.id.drawer_layout);
         Toolbar toolbar = findViewById(R.id.my_toolbar);
@@ -70,6 +73,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     bottomNavigationView.setItemBackgroundResource(R.color.ajouter_color);
 
                 }
+
                 else if(R.id.expenses==itemId)
                 {
                     setFragment(expenseFragment);
@@ -116,6 +120,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         else if (itemId == R.id.ajouter) {
             setFragment(ajouterFragment);
             bottomNavigationView.setItemBackgroundResource(R.color.ajouter_color);
+        }
+        else if (itemId == R.id.logout)
+        {
+            mAuth.signOut();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+
         }
         else if(R.id.expenses==itemId)
         {

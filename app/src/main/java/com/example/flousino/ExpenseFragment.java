@@ -1,5 +1,6 @@
 package com.example.flousino;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,7 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.flousino.Model.Data;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -22,6 +26,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -147,6 +154,16 @@ public class ExpenseFragment extends Fragment {
                 holder.setType(model.getType());
                 holder.setNote(model.getNote());
                 holder.setDate(model.getDate());
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        post_key=getRef(position).getKey();
+                        amount=model.getAmount();
+                        type=model.getType();
+                        note=model.getNote();
+                        updateDataItem();
+                    }
+                });
             }
         };
 
@@ -164,6 +181,75 @@ public class ExpenseFragment extends Fragment {
             adapter.stopListening();
         }
     }
+    // Update edit text
+    private EditText ammountEditText;
+    private EditText typeEditText;
+    private EditText noteEditText;
+    // button for update and delete
+    private Button btnUpdate;
+    private Button btnDelete;
+    // Data item value to update
+    private int amount;
+    private String type;
+    private String note;
+    private String post_key;
+    private void updateDataItem ()
+    {
+    AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+    LayoutInflater inflater=getLayoutInflater();
+    View myview=inflater.inflate(R.layout.update_data_item,null);
+        builder.setView(myview);
+    ammountEditText=myview.findViewById(R.id.amount_edt);
+    typeEditText=myview.findViewById(R.id.type_edt);
+    noteEditText=myview.findViewById(R.id.note_edt);
+
+    btnUpdate=myview.findViewById(R.id.btnUpdate);
+    btnDelete=myview.findViewById(R.id.btnDelete);
+    AlertDialog dialog=builder.create();
+        ammountEditText.setText(String.valueOf(amount));
+        typeEditText.setText(type);
+        typeEditText.setSelection(type.length());
+        noteEditText.setText(note);
+        noteEditText.setSelection(note.length());
+        ammountEditText.setSelection(String.valueOf(amount).length());
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            type = typeEditText.getText().toString().trim();
+            note = noteEditText.getText().toString().trim();
+            String mdammount =String.valueOf(amount);
+            mdammount=ammountEditText.getText().toString().trim();
+            int amount=Integer.parseInt(mdammount);
+            String mDate = DateFormat.getDateInstance().format(new Date());
+            Data data=new Data(amount,type,mDate,note,post_key);
+            mExpenseDatabase.child(post_key).setValue(data, (error, ref) -> {
+                if (error == null) {
+                    Toast.makeText(getActivity(), "Data Updated Successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "Failed to update income data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            dialog.dismiss();
+
+        }
+    });
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            mExpenseDatabase.child(post_key).removeValue((error, ref) -> {
+                if (error == null) {
+                    Toast.makeText(getActivity(), "data Deleted successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "Failed to delete data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            dialog.dismiss();
+        }
+    });
+        dialog.show();
+
+}
 
 }
 

@@ -158,7 +158,7 @@ public class AjouterFragment extends Fragment {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Data model) {
+            protected void onBindViewHolder(@NonNull MyViewHolder holder,int position, @NonNull Data model) {
                 // Bind the data from the model to the view holder
                 holder.setAmount(model.getAmount());
                 holder.setType(model.getType());
@@ -221,7 +221,7 @@ public class AjouterFragment extends Fragment {
                 mdammount=ammountEditText.getText().toString().trim();
                 int amount=Integer.parseInt(mdammount);
                 String mDate = DateFormat.getDateInstance().format(new Date());
-                Data data=new Data(amount,type,note,mDate,post_key);
+                Data data=new Data(amount,type,mDate,note,post_key);
                 mIncomeDatabase.child(post_key).setValue(data, (error, ref) -> {
                     if (error == null) {
                         Toast.makeText(getActivity(), "Data Updated Successfully", Toast.LENGTH_SHORT).show();
